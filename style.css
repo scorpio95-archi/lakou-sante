@@ -1,0 +1,241 @@
+/* ============================================================
+   LAKOU SANTÉ — feuille de style
+   Univers : médecine moderne, clinique mais vivant.
+   Palette : blanc clinique, vert de bloc opératoire, bleu de
+   dossier médical, rouge-corail de pouls/tension.
+   ============================================================ */
+
+:root{
+  --clinic:   #f3f7f5;   /* fond général, blanc clinique légèrement mentholé */
+  --panel:    #eaf1ee;   /* fond des blocs / cartes */
+  --line:     #d6e3de;   /* traits, séparateurs */
+  --ink:      #0e2420;   /* texte principal, noir verdâtre profond */
+  --ink-soft: #4a5f59;   /* texte secondaire */
+  --scrub:    #1c6f5c;   /* vert de bloc opératoire — couleur de marque */
+  --scrub-dk: #124a3d;
+  --azure:    #2a5c86;   /* bleu dossier médical / radiographie */
+  --pulse:    #d34a3d;   /* rouge-corail pouls / tension artérielle */
+  --pulse-dk: #a8382d;
+  --gauze:    #ffffff;   /* blanc pansement, cartes */
+  --paper:    #fbfdfc;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Literata', serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--clinic);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- fil d'ariane ---------- */
+.breadcrumb{
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.02em;
+  background:var(--ink);color:var(--paper);
+  padding:8px 18px;
+}
+.breadcrumb a{color:var(--paper);text-decoration:none;font-weight:600;opacity:0.92;}
+.breadcrumb a:hover{opacity:1;text-decoration:underline;}
+.breadcrumb span.sep{opacity:0.4;}
+.breadcrumb span.current{opacity:0.6;}
+
+/* ---------- header ---------- */
+header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 24px 10px;
+}
+.logo-link{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-mark{width:38px;height:38px;flex-shrink:0;}
+.logo-text{
+  font-family:var(--font-display);font-weight:700;font-size:1.25rem;
+  color:var(--ink);letter-spacing:-0.01em;
+}
+.logo-text span{
+  display:block;font-weight:500;font-size:0.72rem;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--scrub);margin-top:-2px;
+}
+
+/* ---------- hero / bannière ambiance ---------- */
+.hero{
+  position:relative;
+  margin:12px 16px 0;
+  border-radius:20px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(28,111,92,0.14), transparent 55%),
+    radial-gradient(circle at 85% 75%, rgba(42,92,134,0.14), transparent 55%),
+    linear-gradient(180deg, #ffffff 0%, var(--panel) 100%);
+  border:1px solid var(--line);
+  padding:38px 22px 26px;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(28,111,92,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28,111,92,0.055) 1px, transparent 1px);
+  background-size:26px 26px;
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:2;text-align:center;}
+.hero-eyebrow{
+  font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--scrub);
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(28,111,92,0.08);
+  border:1px solid rgba(28,111,92,0.22);
+  border-radius:30px;padding:5px 14px;margin-bottom:20px;
+}
+.hero-eyebrow .dot{
+  width:7px;height:7px;border-radius:50%;background:var(--pulse);
+  animation:beat 1.6s ease-in-out infinite;
+}
+@keyframes beat{
+  0%,100%{transform:scale(1);opacity:1;}
+  50%{transform:scale(1.5);opacity:0.55;}
+}
+.hero h1{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(2.1rem,7vw,3.1rem);
+  letter-spacing:-0.02em;margin:0 0 12px;color:var(--ink);
+}
+.hero p{
+  max-width:520px;margin:0 auto;color:var(--ink-soft);
+  font-size:1.02rem;
+}
+/* ---------- tracé EKG (signature) ---------- */
+.ekg-wrap{
+  position:relative;height:74px;margin:26px auto 6px;max-width:640px;
+  z-index:2;
+}
+.ekg-wrap svg{width:100%;height:100%;overflow:visible;}
+.ekg-line{
+  fill:none;stroke:var(--pulse);stroke-width:2.4;
+  stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1200;stroke-dashoffset:1200;
+  animation:draw-ekg 3.4s linear infinite;
+}
+@keyframes draw-ekg{
+  0%{stroke-dashoffset:1200;}
+  55%{stroke-dashoffset:0;}
+  100%{stroke-dashoffset:-40;}
+}
+.ekg-base{fill:none;stroke:var(--line);stroke-width:1.4;}
+
+/* ---------- étiquettes de section ---------- */
+.section-label{
+  display:flex;align-items:center;gap:14px;
+  margin:46px 20px 22px;
+}
+.section-label span{
+  font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--scrub-dk);white-space:nowrap;
+  background:var(--gauze);border:1px solid var(--line);
+  padding:5px 12px;border-radius:20px;
+}
+.section-label .line{flex:1;height:1px;background:var(--line);}
+.section-intro{
+  margin:0 20px 30px;color:var(--ink-soft);font-size:0.96rem;max-width:640px;
+}
+
+/* ---------- grille de disciplines ---------- */
+.disciplines{
+  display:grid;grid-template-columns:1fr;gap:22px;
+  padding:0 16px;
+}
+@media(min-width:720px){
+  .disciplines{grid-template-columns:repeat(2,1fr);}
+}
+@media(min-width:1080px){
+  .disciplines{grid-template-columns:repeat(3,1fr);}
+}
+
+.card{
+  background:var(--gauze);
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 30px -18px rgba(14,36,32,0.35);
+}
+.card.soon{opacity:0.94;}
+
+.card-image{
+  position:relative;height:168px;
+  background:linear-gradient(135deg, var(--scrub) 0%, var(--scrub-dk) 100%);
+  display:flex;align-items:center;justify-content:center;
+}
+.card-image img{
+  width:100%;height:100%;object-fit:cover;position:absolute;inset:0;
+}
+.card-image .fallback-icon{width:46px;height:46px;position:relative;z-index:1;display:none;}
+.card-image .cross-tick{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size:16px 16px;
+}
+.badge{
+  position:absolute;top:12px;right:12px;
+  font-family:var(--font-mono);font-size:0.66rem;font-weight:600;
+  letter-spacing:0.06em;text-transform:uppercase;
+  padding:4px 10px;border-radius:20px;z-index:2;
+}
+.badge.actif{background:#dff3ea;color:var(--scrub-dk);border:1px solid #b7e2cd;}
+.badge.bientot{background:#fdece9;color:var(--pulse-dk);border:1px solid #f6cbc4;}
+
+.card-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1;}
+.card-title{
+  font-family:var(--font-display);font-weight:700;font-size:1.24rem;
+  color:var(--ink);margin-bottom:6px;letter-spacing:-0.01em;
+}
+.card-desc{color:var(--ink-soft);font-size:0.92rem;margin:0 0 16px;}
+
+.card-facts{margin:0 0 18px;padding:0;}
+.card-facts .fact{
+  border-top:1px dashed var(--line);
+  padding:10px 0;
+}
+.card-facts .fact:first-child{border-top:none;padding-top:0;}
+.card-facts dt{
+  font-family:var(--font-mono);font-size:0.66rem;letter-spacing:0.08em;
+  text-transform:uppercase;color:var(--azure);margin-bottom:4px;
+}
+.card-facts dd{margin:0;font-size:0.87rem;color:var(--ink);}
+
+.btn-explorer,.btn-disabled{
+  margin-top:auto;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-display);font-weight:600;font-size:0.86rem;
+  padding:11px 16px;border-radius:10px;text-decoration:none;
+}
+.btn-explorer{
+  background:var(--scrub);color:#fff;
+  transition:background 0.2s ease;
+}
+.btn-explorer:hover{background:var(--scrub-dk);}
+.btn-explorer svg{width:16px;height:16px;}
+.btn-disabled{
+  background:var(--panel);color:var(--ink-soft);
+  border:1px dashed var(--line);cursor:default;
+}
+
+/* ---------- footer ---------- */
+footer{
+  margin-top:56px;padding:26px 22px 40px;
+  border-top:1px solid var(--line);
+  text-align:center;color:var(--ink-soft);font-size:0.84rem;
+}
+footer strong{color:var(--scrub-dk);}
