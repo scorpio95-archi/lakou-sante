@@ -203,7 +203,12 @@ header{
 }
 .card-desc{color:var(--ink-soft);font-size:0.92rem;margin:0 0 16px;}
 
-.card-facts{margin:0 0 18px;padding:0;}
+.card-facts{
+  margin:0; padding:0;
+  max-height:0; overflow:hidden; opacity:0;
+  transition:max-height .45s ease, opacity .35s ease, margin .45s ease;
+}
+.card.facts-open .card-facts{ opacity:1; margin:0 0 18px; }
 .card-facts .fact{
   border-top:1px dashed var(--line);
   padding:10px 0;
@@ -214,6 +219,17 @@ header{
   text-transform:uppercase;color:var(--azure);margin-bottom:4px;
 }
 .card-facts dd{margin:0;font-size:0.87rem;color:var(--ink);}
+
+.btn-lire-suite{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-mono);font-size:0.72rem;font-weight:600;
+  letter-spacing:0.05em;text-transform:uppercase;
+  color:var(--azure);background:none;border:none;padding:0;
+  margin-bottom:16px;cursor:pointer;align-self:flex-start;
+}
+.btn-lire-suite svg{width:12px;height:12px;transition:transform .3s ease;}
+.btn-lire-suite.open svg{transform:rotate(180deg);}
+.btn-lire-suite:hover{color:var(--scrub-dk);}
 
 .btn-explorer,.btn-disabled{
   margin-top:auto;
